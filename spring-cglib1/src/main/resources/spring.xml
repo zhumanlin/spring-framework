@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!--<bean id="index" class="com.luban.service.IndexService" primary="">-->
+
+		<!--<constructor-arg index="0" value="order"></constructor-arg>-->
+	<!--</bean>-->
+
+	<!--<bean id="order" class="com.luban.service.OrderService" fm="indexService">-->
+
+	<!--</bean>-->
+
+	<!--<bean id="orderChil" parent="order">-->
+		<!--<property name="name" value="children"></property>-->
+	<!--</bean>-->
+</beans>
