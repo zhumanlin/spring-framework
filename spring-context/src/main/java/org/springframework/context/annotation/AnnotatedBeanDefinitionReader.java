@@ -242,7 +242,7 @@ public class AnnotatedBeanDefinitionReader {
 		//不知道
 		abd.setInstanceSupplier(instanceSupplier);
 		/**
-		 * 得到类的作用域
+		 * 得到类的作用域,默认singleton
 		 */
 		ScopeMetadata scopeMetadata = this.scopeMetadataResolver.resolveScopeMetadata(abd);
 		/**
@@ -250,7 +250,7 @@ public class AnnotatedBeanDefinitionReader {
 		 */
 		abd.setScope(scopeMetadata.getScopeName());
 		/**
-		 * 生成类的名字通过beanNameGenerator记得布置过一个作业
+		 * 生成类的名字通过beanNameGenerator，可以自己扩展
 		 */
 		String beanName = (name != null ? name : this.beanNameGenerator.generateBeanName(abd, this.registry));
 		/**
@@ -298,8 +298,7 @@ public class AnnotatedBeanDefinitionReader {
 
 		/**
 		 * ScopedProxyMode 这个知识点比较复杂，需要结合web去理解
-		 * 可以暂时放一下，等说道springmvc的时候再说
-		 * 或者看情况现在说也是一样的
+		 * 可以暂时放一下
 		 */
 		definitionHolder = AnnotationConfigUtils.applyScopedProxyMode(scopeMetadata, definitionHolder, this.registry);
 

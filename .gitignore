@@ -22,7 +22,7 @@ classes/
 buildSrc/build
 /spring-*/build
 /src/asciidoc/build
-target/
+#target/
 
 # Eclipse artifacts, including WTP generated manifests
 .classpath
@@ -38,3 +38,6 @@ out
 test-output
 atlassian-ide-plugin.xml
 .gradletasknamecache
+#!org/springframework/aop/target/
+#!org/springframework/aop/target
+#!org/springframework/aop/
