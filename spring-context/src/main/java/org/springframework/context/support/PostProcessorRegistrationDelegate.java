@@ -243,7 +243,7 @@ final class PostProcessorRegistrationDelegate {
 				nonOrderedPostProcessorNames.add(ppName);
 			}
 		}
-		priorityOrderedPostProcessors.remove(1);
+//		priorityOrderedPostProcessors.remove(1);
 		// First, register the BeanPostProcessors that implement PriorityOrdered.
 		sortPostProcessors(priorityOrderedPostProcessors, beanFactory);
 		registerBeanPostProcessors(beanFactory, priorityOrderedPostProcessors);
@@ -272,7 +272,7 @@ final class PostProcessorRegistrationDelegate {
 		registerBeanPostProcessors(beanFactory, nonOrderedPostProcessors);
 
 		// Finally, re-register all internal BeanPostProcessors.
-		internalPostProcessors.remove(1);
+//		internalPostProcessors.remove(1);
 		sortPostProcessors(internalPostProcessors, beanFactory);
 
 		registerBeanPostProcessors(beanFactory, internalPostProcessors);
