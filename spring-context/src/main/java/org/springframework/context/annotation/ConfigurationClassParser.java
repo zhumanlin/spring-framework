@@ -321,7 +321,7 @@ class ConfigurationClassParser {
 		//ImportSelector
 		//普通类
 		//ImportBeanDefinitionRegistrar
-		//这里和内部地柜调用时候的情况不同
+		//这里和内部递归调用时候的情况不同
 		/**
 		 * 这里处理的import是需要判断我们的类当中时候有@Import注解
 		 * 如果有这把@Import当中的值拿出来，是一个类

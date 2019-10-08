@@ -521,10 +521,15 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			// Tell the subclass to refresh the internal bean factory.
 			//返回一个factory 为什么需要返回一个工厂
 			//因为要对工厂进行初始化
+			//这里同时会限制容器只能调用一个该refresh方法，在obtainFreshBeanFactory()中的refreshBeanFactory()方法中限制了
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
-			//准备工厂
+			/**准备工厂，这里为工厂设置类加载器、bean表达式解释器等一些初始化操作
+			 * 这里会把EnvironmentAware,EmbeddedValueResolverAware,ResourceLoaderAware,ApplicationEventPublisherAware,MessageSourceAware,ApplicationContextAware
+			 * 这几个接口忽略掉，Spring不会帮你注入这些接口的实例，同时注册两个后置处理器：ApplicationContextAwareProcessor、ApplicationListenerDetector，第一个主要是
+			 * 给实现了上面六个接口的对象注入相应的资源
+			 */
 			prepareBeanFactory(beanFactory);
 
 			try {
@@ -535,8 +540,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
-				//在spring的环境中去执行已经被注册的 factory processors
-				//设置执行自定义的ProcessBeanFactory 和spring内部自己定义的
+				//在spring的环境中去执行已经被注册的后置工厂处理器
+				//设置执行自定义的BeanFactoryPostProcessor 和spring内部自己定义的
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
@@ -659,7 +664,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		//ApplicationContextAwareProcessor
 		// 能够在bean中获得到各种*Aware（*Aware都有其作用）
 		beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
-
+		//忽略这几个接口，spring容器就不会帮你注入这几个接口的实例
 		beanFactory.ignoreDependencyInterface(EnvironmentAware.class);
 		beanFactory.ignoreDependencyInterface(EmbeddedValueResolverAware.class);
 		beanFactory.ignoreDependencyInterface(ResourceLoaderAware.class);
@@ -675,6 +680,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.registerResolvableDependency(ApplicationContext.class, this);
 
 		// Register early post-processor for detecting inner beans as ApplicationListeners.
+		//注册一个后置处理器，主要检查是否实现了ApplicationListener接口，如果实现了就加入当前的applicationContext的applicationListeners列表
 		beanFactory.addBeanPostProcessor(new ApplicationListenerDetector(this));
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found.
@@ -718,8 +724,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		//这个地方需要注意getBeanFactoryPostProcessors()是获取手动给spring的BeanFactoryPostProcessor
 		//自定义并不仅仅是程序员自己写的
 		//自己写的可以加companent也可以不加
-		//如果加了getBeanFactoryPostProcessors()这个地方得不得，是spring自己扫描的
-		//为什么得不到getBeanFactoryPostProcessors（）这个方法是直接获取一个list，
+		//如果加了getBeanFactoryPostProcessors()这个地方得不到，是spring自己扫描的
+		//为什么得不到？getBeanFactoryPostProcessors（）这个方法是直接获取一个list，
 		//这个list是在AnnotationConfigApplicationContext被定义
 		//所谓的自定义的就是你手动调用AnnotationConfigApplicationContext.addBeanFactoryPostProcesor();
 

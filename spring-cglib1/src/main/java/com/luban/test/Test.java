@@ -2,11 +2,6 @@ package com.luban.test;
 
 import com.luban.app.Appconfig;
 import com.luban.service.IndexService;
-import com.luban.service.Luban;
-import com.luban.service.OrderService;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.cglib.core.SpringNamingPolicy;
-import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Test {
