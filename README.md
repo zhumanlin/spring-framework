@@ -12,9 +12,10 @@ section in the reference for a more complete introduction.
 
 ## 编译过程
 从官网下载的源码编译过程参考这个同学的博客：https://blog.csdn.net/baomw/article/details/83956300  
-其实如果您本来就有很好的开发环境(其实我理解就是配合JDK环境变量，gradle用工程默认的，重点是给gradle设置阿里的资源库)，直接把我这份源码下载下来直接在根目录加上'-x javadocJar -x test'参数运行build命令就可以编译成功的了，如有意外请联系QQ:873091763  
+其实如果您本来就有很好的开发环境(其实我理解就是配好JDK环境变量，gradle用工程默认的，重点是给gradle设置阿里的资源库)，直接把我这份源码下载下来直接在根目录加上'-x javadocJar -x test'参数运行build命令就可以编译成功的了，如有意外请联系QQ:873091763  
 <img src="src/docs/asciidoc/images/gradleConfig.jpg" width="580" height="480"> 
 <img src="src/docs/asciidoc/images/buildConfig.jpg" width="580" height="480">  
+注意build的时候一定要带上'-x javadocJar -x test'参数，因为代码改动比较多，有些测试类会报错，后面我慢慢会恢复过来，还有因为加了很多中文注释，所以生成javadoc的时候会报编码错误，这里要跳过生成javadoc
 此外附上我的init.gradle配置（这个位置放在用户目录的.gradle目录下，如：C:\Users\Administrator\.gradle\init.gradle）
 ```groovy
 allprojects{
