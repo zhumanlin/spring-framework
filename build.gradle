@@ -282,7 +282,7 @@ configure(rootProject) {
 		testCompile("org.hsqldb:hsqldb:${hsqldbVersion}")
 		testCompile("org.hibernate:hibernate-core:5.1.14.Final")
 	}
-
+// 补充一下为什么要注释这里，因为源码中有很多中文注释，在生成javadoc的时候会报编码错误，我对gradle是真不熟，只能出此下策
 //	artifacts {
 //		archives docsZip
 //		archives schemaZip
