@@ -537,6 +537,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				//这个方法在当前版本的spring是没用任何代码的
 				//可能spring期待在后面的版本中去扩展吧
+				//上面是老师的说法，我看了一下，Web的上下文是有用的，这个后面我再去研究一下XmlWebApplicationContext的初始化
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
@@ -606,8 +607,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize any placeholder property sources in the context environment
-		//这个方法目前没有子类去实现
-		//估计spring是期待后面的版本有子类去实现吧
+		//这个主要是WebContext初始化参数用的，我理解是把xml中的${key}替换成实际值，这个后面用web上下文证实一下
 		initPropertySources();
 
 		// Validate that all properties marked as required are resolvable
@@ -918,6 +918,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void finishRefresh() {
 		// Clear context-level resource caches (such as ASM metadata from scanning).
+		//清除上下文级别的资源缓存（例如来自扫描的ASM元数据）
 		clearResourceCaches();
 
 		// Initialize lifecycle processor for this context.
